@@ -1,0 +1,10 @@
+# <docker-hosts>
+{{ range $container := $ }}
+{{- $container.IP }} {{ $container.Name }}.docker    # {{ $container.Name }} ({{$container.ID}} from {{$container.Image.Repository}})
+{{ end }}
+{{- range $container := whereLabelExists $ "hosts" -}}
+{{ range $hostname := split $container.Labels.hosts " " }}
+{{ $container.IP }} {{ $hostname }}    # {{ $container.Name }} ({{$container.ID}} from {{$container.Image.Repository}})
+{{- end -}}
+{{ end }}
+# </docker-hosts>
