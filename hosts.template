@@ -9,7 +9,7 @@
 {{- end -}}
 {{ end }}
 
-{{- range $container := whereLabelExists $ "com.docker.compose.project" -}}
+{{ range $container := whereLabelExists $ "com.docker.compose.project" -}}
 {{ (first $container.Networks).IP }} {{ index $container.Labels "com.docker.compose.service" -}}_
     {{- index $container.Labels "com.docker.compose.container-number" }}.
     {{- index $container.Labels "com.docker.compose.project" -}}.docker     # {{ $container.Name }} from docker-compose project {{ index $container.Labels "com.docker.compose.project" }}
